@@ -1,39 +1,18 @@
 import React, { Component } from 'react';
-import { NICE, SUPER_NICE } from './colors';
-
-class Counter extends Component {
-  constructor(props) {
-    super(props);
-    this.state = { counter: 0 };
-    this.interval = setInterval(() => this.tick(), 1000);
-  }
-
-  tick() {
-    this.setState({
-      counter: this.state.counter + this.props.increment
-    });
-  }
-
-  componentWillUnmount() {
-    clearInterval(this.interval);
-  }
-
-  render() {
-    return (
-      <h1 style={{ color: this.props.color }}>
-        Counter ({this.props.increment}): {this.state.counter}
-      </h1>
-    );
-  }
-}
 
 export class App extends Component {
+  static customInsideVar = "Hello, inside static varible"
   render() {
     return (
       <div>
-        <Counter increment={1} color={NICE} />
-        <Counter increment={5} color={SUPER_NICE} />
+		<h2>Echo displayName: {App.displayName}</h2> // not work.
+		<h2>Echo defaultProps: {App.defaultProps.username}</h2> // not work.
+		<h2>Echo customOutsideVar: {App.customOutsideVar}</h2> // not work.
+		<h2>Echo customInsideVar: {App.customInsideVar}</h2> // work.
       </div>
     );
   }
 }
+App.displayName = "AppComponent";
+App.defaultProps = { username : "@isman-usoh" };
+App.customOutsideVar = "Hello, outside static varible";
